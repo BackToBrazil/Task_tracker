@@ -2,9 +2,8 @@
 #include "Task_manager.h"
 #include <string>
 #include <vector>
-using namespace task_tracker;
-
 namespace task_tracker {
+	using namespace task_tracker;
 	class Task_storage {
 		// responsible for the i/o of tasks in JSON files.
 		// its first going to load any Task from the file.JSON, then after it, pass them to the Task_manager.

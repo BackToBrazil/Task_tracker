@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App_controller.cpp" />
+    <ClCompile Include="Console_view.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Task_manager.cpp" />
+    <ClCompile Include="Task_storage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App_controller.h" />
