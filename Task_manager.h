@@ -12,9 +12,10 @@ namespace task_tracker {
 		Task_manager(){}
 		void add_task();
 		void update_task();
+		void input_task_list(std::vector<Task>);	// revieves task list from task_storage.
+		std::vector<Task> output_task_list();	// return the task_list to task_storage.
 		void delete_task();
 	private:
-		Task_storage m_storage;
-		std::vector<Task> m_task_list{};
+		std::vector<Task> m_task_list;
 	};
 }

@@ -15,7 +15,7 @@ namespace task_tracker {
 		Task(int id, int created_at) : m_id{ id }, m_created_at{ created_at }, m_updated_at{created_at} {}
 		int m_id;
 		std::string m_description = "no description.";
-		status m_status = status::in_progress;
+		status m_status = status::todo;
 		int m_created_at;
 		int m_updated_at;
 	};
