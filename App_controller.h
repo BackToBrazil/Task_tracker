@@ -3,6 +3,7 @@
 #include "Task_storage.h"
 #include "Console_view.h"
 #include "Task.h"
+#include "Token.h"
 namespace task_tracker {
 	using namespace task_tracker;
 	class App_controller {

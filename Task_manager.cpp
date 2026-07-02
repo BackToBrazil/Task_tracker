@@ -5,3 +5,6 @@ void Task_manager::add_task(Task task) {
 	// verify if date is valid
 	
 }
+Task Task_manager::create_task(std::string description) {
+	
+}
