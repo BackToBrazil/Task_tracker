@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClInclude Include="App_controller.h" />
     <ClInclude Include="Console_view.h" />
+    <ClInclude Include="Date.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="Task_manager.h" />
     <ClInclude Include="Task_storage.h" />
