@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <exception>
 #include "Token.h"
 namespace task_tracker {
 	using namespace task_tracker;
@@ -8,12 +9,10 @@ namespace task_tracker {
 		// responsible for the console i/o
 	public:
 		Console_view(){}
-		Token read_input();	// standard input loop.
-		// fill_from_file();
-		// recover_fail_input();
-		Token interpret_input();	// makes sense of the input.
-		void send_message(std::string);
+		Token get_token();
 	private:
-		char get_input(char);	// just get the plain user input.
+		char get_input();	// just get the plain user input.
+		Token_kind get_kind();
+		std::string get_task_name(char);
 	};
 }

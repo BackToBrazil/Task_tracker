@@ -1,4 +1,5 @@
 #include "Task_manager.h"
+#include "Token.h"
 namespace task_tracker {
 	std::ostream& operator<<(std::ostream& os, const status& status) {
 		switch (status)
