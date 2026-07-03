@@ -1,11 +1,12 @@
 #include "Console_view.h"
 using namespace task_tracker;
 using std::cin, std::cout, std::string;
-char Console_view::get_input() {
+char Console_view::get_input(char terminator) {
 	// get the plain input
 	char ch = '0';
 	if (cin >> ch) {
-		return ch;
+		if(ch != terminator)
+			return ch;
 	}
 	else if (cin.eof()) {
 		return ch;
@@ -18,19 +19,21 @@ char Console_view::get_input() {
 Token Console_view::interpret_input() {
 	// makes sense of the input.
 	string temp;
+	char ch;
 	while (true) {
-		temp += get_input();
+		ch = get_input(' ');
+		temp += ch;
 		if (temp == "add") {
-			return Token::add_task;
+			
 		}
 		if (temp == "end") {
-			return Token::end_program;
+			
+		}
+		else {
+			
 		}
 	}
 }
 Token Console_view::read_input() {
-	// standard input loop.
-	cout << "start:\n";
-	Token token = interpret_input();
-	return token;
+	return interpret_input();
 }

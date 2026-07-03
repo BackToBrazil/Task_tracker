@@ -7,6 +7,6 @@ int main() {
 	Console_view console_view{};
 
 	App_controller app{ task_manager, task_storage , console_view };
-	//app.run();
+	app.run();
 	return 0;
 }
