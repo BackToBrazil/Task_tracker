@@ -40,6 +40,16 @@ namespace task_tracker {
 			name += ch;
 		}
 	}
+	std::string Console_view::get_command(char t1, char t2) {
+		std::string name;
+		while (true) {
+			char ch = get_input();
+			if (ch == t1 || t2)
+				return name;
+			name += ch;
+		}
+	}
+
 	Token_kind Console_view::get_kind() {
 		return Token_kind::UNKOWN;
 	}
@@ -62,7 +72,7 @@ namespace task_tracker {
 			break;
 		default:
 			cin.unget();
-			cin >> value;
+			value = get_command('-',' ');
 			return Token{ Token_kind::COMMAND, value };
 			break;
 		}
