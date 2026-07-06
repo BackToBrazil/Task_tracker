@@ -23,41 +23,28 @@ namespace task_tracker {
 		}
 	}
 	Token_kind Console_view::get_kind() {
-		char ch = get_input();
-		if (ch == '"') {
-			return Token_kind::task_name;
-		}
-		else if (ch == '-') {
-			return Token_kind::command_flag;
-		}
-		else if (isalnum(ch)) {
-			return Token_kind::task_id;
-		}
-		else if(isdigit(ch)){
-			return Token_kind::command_name;
-		}
-		else {
-			throw std::runtime_error{ "input not good.\n" };
-		}
+		
 	}
 	Token Console_view::get_token() {
-		Token_kind kind = get_kind();
-		switch (kind)
+		char ch = get_input();
+		string value;
+		switch (ch)
 		{
-		case task_tracker::Token_kind::invalid_token:
-			throw std::runtime_error{ "input not good.\n" };
+		case'-':
+			return Token{ Token_kind::FLAG };
 			break;
-		case task_tracker::Token_kind::task_name:
-			return Token{kind, get_task_name('"') };
-		case task_tracker::Token_kind::command_flag:
+		case'"':
+			return Token{ Token_kind::TASK_NAME };
 			break;
-		case task_tracker::Token_kind::task_id:
-			break;
-		case task_tracker::Token_kind::command_name:
-			// get_command();
+		case'0':case'1':case'2':case'3':case'4':case'5':case'6':case'7':case'8':case'9':
+			cin.unget();
+			cin >> value;
+			return Token{ Token_kind::VALUE, value };
 			break;
 		default:
-			throw std::runtime_error{ "something went wrong!\n" };
+			cin.unget();
+			cin >> value;
+			return Token{ Token_kind::COMMAND, value };
 			break;
 		}
 	}
