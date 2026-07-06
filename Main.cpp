@@ -12,9 +12,9 @@ int main() {
 
 		App_controller app{ task_manager, task_storage , console_view };
 	
-		std::cout << "start\n";
+		std::cout << "START\n";
 		Token token = console_view.get_token();
-		std::cout << token;
+		std::cout << token << '\n';
 		return 0;
 	}
 	catch (std::exception& e) {

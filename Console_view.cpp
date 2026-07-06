@@ -23,7 +23,7 @@ namespace task_tracker {
 		}
 	}
 	Token_kind Console_view::get_kind() {
-		
+		return Token_kind::UNKOWN;
 	}
 	Token Console_view::get_token() {
 		char ch = get_input();
