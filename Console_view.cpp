@@ -49,10 +49,6 @@ namespace task_tracker {
 			name += ch;
 		}
 	}
-
-	Token_kind Console_view::get_kind() {
-		return Token_kind::UNKOWN;
-	}
 	Token Console_view::get_token() {
 		char ch = get_input();
 		string value;

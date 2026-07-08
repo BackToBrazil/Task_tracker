@@ -12,7 +12,6 @@ namespace task_tracker {
 		Token get_token();
 	private:
 		char get_input();	// just get the plain user input.
-		Token_kind get_kind();
 		std::string get_task_name(char);
 		std::string get_command(char, char);
 	};
