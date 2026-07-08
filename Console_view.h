@@ -9,10 +9,10 @@ namespace task_tracker {
 		// responsible for the console i/o
 	public:
 		Console_view(){}
-		Token get_token();
+		Token get_token();	// gets the chars from the get_input() and transform it into Tokens.
 	private:
 		char get_input();	// just get the plain user input.
-		std::string get_task_name(char);
-		std::string get_command(char, char);
+		std::string get_task_name(char);	// called inside the get_token() when the Token is a TASKNAME Token.
+		std::string get_command(char, char);	// called inside the get_token() when the Token is a COMMAND Token.
 	};
 }
