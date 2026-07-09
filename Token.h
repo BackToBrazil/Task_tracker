@@ -3,10 +3,11 @@
 namespace task_tracker {
 	enum class Token_kind {
 		COMMAND,
-		VALUE,
-		FLAG,
-		TASK_NAME,
-		UNKOWN
+		TASK_ID,
+		TASK_DESCRIPTION,
+		TASK_STATUS,
+		END_OF_FILE,
+		QUIT
 	};
 	struct Token {
 		Token(Token_kind kind) : m_kind{ kind }{}

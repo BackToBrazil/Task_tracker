@@ -141,6 +141,7 @@
     <ClInclude Include="Task_manager.h" />
     <ClInclude Include="Task_storage.h" />
     <ClInclude Include="Token.h" />
+    <ClInclude Include="Token_stream.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
