@@ -50,7 +50,7 @@ namespace task_tracker {
         for (auto x : words_list) {
             if (isalpha(x.front())) {
                 bool is_status = false;
-                // verify if its not a token_status first
+                // verify if its not a Task_status
                 for (auto y : all_Task_status) {
                     if (x == y) {
                         token_list.push_back(Token{ Token_kind::TASK_STATUS, x });
@@ -66,7 +66,12 @@ namespace task_tracker {
             }
             if (x.front() == '"') {
                 // remove the '"' from the value first
-                token_list.push_back(Token{ Token_kind::TASK_DESCRIPTION, x });
+                std::string new_token;
+                for (auto ch : x) {
+                    if (ch != '"')
+                        new_token += ch;
+                }
+                token_list.push_back(Token{ Token_kind::TASK_DESCRIPTION, new_token });
             }
         }
         return token_list;
