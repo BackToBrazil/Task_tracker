@@ -18,4 +18,5 @@ namespace task_tracker {
 	std::string to_string(const Token_kind&);
 	std::ostream& operator<<(std::ostream&, const Token&);
 	std::ostream& operator<<(std::ostream&, const Token_kind&);
+	std::istream& operator>>(std::istream&, Token&);
 }

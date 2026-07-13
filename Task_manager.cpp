@@ -4,11 +4,11 @@ namespace task_tracker {
 	std::ostream& operator<<(std::ostream& os, const status& status) {
 		switch (status)
 		{
-		case status::todo:
+		case status::TODO:
 			return os << "TODO";
-		case status::in_progress:
+		case status::IN_PROGRESS:
 			return os << "in_progress";
-		case status::done:
+		case status::DONE:
 			return os << "done";
 		default:
 			return os << "status not defined yet";
