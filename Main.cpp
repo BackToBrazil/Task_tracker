@@ -11,9 +11,12 @@ int main() {
 	try {
 		Console_io console_io{};
 		Token_stream token_stream{};
+
 		cout << "start:\n";
 		string line = console_io.get_line();
-		token_stream.get_tokens(line);
+		vector<Token> tokens = token_stream.get_tokens(line);
+		for (auto x : tokens)
+			cout << x << '\t';
 	}
 	catch (std::exception& e) {
 		std::cerr << e.what() << '\n';
