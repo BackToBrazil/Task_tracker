@@ -49,14 +49,17 @@ namespace task_tracker {
         // read each word and translate them into Tokens
         for (auto x : words_list) {
             if (isalpha(x.front())) {
+                bool is_status = false;
                 // verify if its not a token_status first
-                for (auto y : all_Task_status) {    // its duplicating when its written in upper case
+                for (auto y : all_Task_status) {
                     if (x == y) {
                         token_list.push_back(Token{ Token_kind::TASK_STATUS, x });
+                        is_status = true;
                         break;
                     }
                 }
-                token_list.push_back(Token{ Token_kind::TASK_STATUS, x });
+                if (!is_status)
+                    token_list.push_back(Token{ Token_kind::COMMAND, x });
             }
             if (isdigit(x.front())) {
                 token_list.push_back(Token{ Token_kind::TASK_ID, x });

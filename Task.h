@@ -4,12 +4,12 @@
 #include "Date.h"
 #include "Token.h"
 namespace task_tracker {
+	const std::vector<std::string> all_Task_status{ "TODO", "todo", "IN_PROGRESS", "in_progress", "DONE", "done"};
 	enum class status {
 		TODO,
 		IN_PROGRESS,
 		DONE
 	};
-	const std::vector<std::string> all_Task_status{ "TODO", "IN_PROGRESS", "DONE" };
 	struct Task {
 		// simple data structure for tasks.
 		Task(int id, std::string description, Date created_at) : m_id{ id }, m_description{description},
