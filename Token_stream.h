@@ -12,6 +12,5 @@ namespace task_tracker{
 	private:
 		std::vector<std::string> separate_line(const std::string&);
 		std::vector<Token> m_tokens;
-
 	};
 }
