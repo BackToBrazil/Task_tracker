@@ -10,6 +10,7 @@ namespace task_tracker{
 		Token_stream(){}
 		std::vector<Token> get_tokens(const std::string&);
 	private:
+		std::vector<std::string> separate_line(const std::string&);
 		std::vector<Token> m_tokens;
 
 	};

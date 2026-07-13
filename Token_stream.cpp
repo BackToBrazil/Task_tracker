@@ -25,28 +25,30 @@ namespace task_tracker {
     std::ostream& operator<<(std::ostream& os, const task_tracker::Token& token) {
         return os << '(' << token.m_kind << ')' << '(' << token.m_value << ')';
     }
-    std::vector<Token> Token_stream::get_tokens(const std::string& line)
+    std::vector<std::string> Token_stream::separate_line(const std::string& line)
     {
-        std::vector<Token> token_list;
         std::vector<std::string> words_list;
-        std::string token;
-        // separate the line into different words
-        for (auto x: line) {
+        std::string word;
+        for (auto x : line) {
             if (!isspace(x)) {
-                token += x;
-                //std::cout << "char added: " << x << '\n';
+                word += x;
             }
             else {
-                words_list.push_back(token);
-                //std::cout << "token added: " << token << '\n';
-                token.erase();
+                words_list.push_back(word);
+                word.erase();
             }
         }
-        // gambiarra
-        words_list.push_back(token);
-        //std::cout << "token added: " << token << '\n';
-        token.erase();
-        // read each word and translate them into Tokens
+        words_list.push_back(word);
+        word.erase();
+
+        return words_list;
+    }
+    std::vector<Token> Token_stream::get_tokens(const std::string& line)
+    {
+        // read each word and translate it into Tokens
+        std::vector<std::string> words_list = separate_line(line);  // separate the line into different words and creates a vector with each word
+        std::vector<Token> token_list;
+        std::string token;
         for (auto x : words_list) {
             if (isalpha(x.front())) {
                 bool is_status = false;
@@ -65,7 +67,6 @@ namespace task_tracker {
                 token_list.push_back(Token{ Token_kind::TASK_ID, x });
             }
             if (x.front() == '"') {
-                // remove the '"' from the value first
                 std::string new_token;
                 for (auto ch : x) {
                     if (ch != '"')
