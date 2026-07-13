@@ -50,7 +50,13 @@ namespace task_tracker {
         for (auto x : words_list) {
             if (isalpha(x.front())) {
                 // verify if its not a token_status first
-                token_list.push_back(Token{ Token_kind::COMMAND, x });
+                for (auto y : all_Task_status) {    // its duplicating when its written in upper case
+                    if (x == y) {
+                        token_list.push_back(Token{ Token_kind::TASK_STATUS, x });
+                        break;
+                    }
+                }
+                token_list.push_back(Token{ Token_kind::TASK_STATUS, x });
             }
             if (isdigit(x.front())) {
                 token_list.push_back(Token{ Token_kind::TASK_ID, x });
