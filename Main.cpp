@@ -3,14 +3,17 @@
 #include <iostream>
 #include "Token.h"
 #include "Console_io.h"
+#include "Token_stream.h"
 using namespace task_tracker;
 using namespace std;
 
 int main() {
 	try {
 		Console_io console_io{};
+		Token_stream token_stream{};
 		cout << "start:\n";
-		cout << console_io.get_line();
+		string line = console_io.get_line();
+		token_stream.get_tokens(line);
 	}
 	catch (std::exception& e) {
 		std::cerr << e.what() << '\n';

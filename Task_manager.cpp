@@ -24,7 +24,7 @@ namespace task_tracker {
 	void task_tracker::Task_manager::add_task(std::string description) {
 		// verify if id doesnt already exists
 		// verify if date is valid
-		int list_size = m_task_list.size()+1;
-		m_task_list.push_back(Task{ list_size, description  ,Date{02,"July",2026} });
+		//int list_size = m_task_list.size()+1;
+		//m_task_list.push_back(Task{ list_size, description  ,Date{02,"July",2026} });
 	}
 }
