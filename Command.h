@@ -9,6 +9,7 @@ namespace task_tracker {
 		mark_in_progress,
 		mark_done,
 		list,
+		unknown,
 	};
 	struct Command {
 		Command_type command_type;

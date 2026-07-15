@@ -15,10 +15,13 @@ int main() {
 		Parser parser{};
 
 		cout << "start:\n";
-		string line = console_io.get_line();
-		vector<Token> tokens = token_stream.get_tokens(line);
-		Command command = parser.get_command(tokens);
-		cout << command;
+		while (true) {
+			string line = console_io.get_line();
+			vector<Token> tokens = token_stream.get_tokens(line);
+			Command command = parser.get_command(tokens);
+			cout << command;
+			cout << "\ntype something: ";
+		}
 	}
 	catch (std::exception& e) {
 		std::cerr << e.what() << '\n';

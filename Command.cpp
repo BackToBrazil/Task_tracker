@@ -9,14 +9,14 @@ namespace task_tracker {
 			return Command_type::delete_;
 		if (word == "update")
 			return Command_type::update;
-		if (word == "mark_in_progress")
+		if (word == "mark-in-progress")
 			return Command_type::mark_in_progress;
-		if (word == "mark_done")
+		if (word == "mark-done")
 			return Command_type::mark_done;
 		if (word == "list")
 			return Command_type::list;
 
-		throw std::runtime_error{ "unknown command\n" };
+		return Command_type::unknown;
 	}
 	std::ostream& operator<<(std::ostream& os, Command_type& type)
 	{
