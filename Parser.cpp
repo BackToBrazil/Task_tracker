@@ -24,9 +24,10 @@ namespace task_tracker {
             if (current_token.m_kind == Token_kind::TASK_STATUS) {
                 return Command{ type, current_token.m_value };
             }
+            else {
+                return Command{ Command_type::unknown, "invalid command" };
+            }
         }
-        else {
-            return Command{ Command_type::unknown, "invalid" };
-        }
+        return Command{ Command_type::unknown, "invalid command" };
     }
 }

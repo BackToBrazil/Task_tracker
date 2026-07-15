@@ -9,6 +9,8 @@ using namespace task_tracker;
 using namespace std;
 
 int main() {
+	//TODO: WHEN ENTERING WHITESPACE OR NEWLINE AS FIRST CHAR THE PROGRAM CRASHES
+	//TODO: WHEN ENTERING STRANGE INPUT ('%' "asdsd") PROGRAM CRASHES
 	try {
 		Console_io console_io{};
 		Token_stream token_stream{};

@@ -3,6 +3,7 @@
 #include "Token.h"
 #include <vector>
 #include <stdexcept>
+#include <iostream>
 namespace task_tracker {
 	class Parser {
 	public:

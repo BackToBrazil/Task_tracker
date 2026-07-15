@@ -4,7 +4,7 @@
 #include "Date.h"
 #include "Token.h"
 namespace task_tracker {
-	const std::vector<std::string> all_Task_status{ "TODO", "todo", "IN_PROGRESS", "in_progress", "DONE", "done"};
+	const std::vector<std::string> all_Task_status{ "TODO", "todo", "IN-PROGRESS", "in-progress", "DONE", "done"};
 	enum class status {
 		TODO,
 		IN_PROGRESS,

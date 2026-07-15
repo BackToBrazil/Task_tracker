@@ -26,9 +26,9 @@ namespace task_tracker {
 			return os << '(' << "update" << ')';
 		if (type == string_to_command("delete"))
 			return os << '(' << "delete" << ')';
-		if (type == string_to_command("mark_in_progress"))
-			return os << '(' << "mark_in_progress" << ')';
-		if (type == string_to_command("mark_done"))
+		if (type == string_to_command("mark-in-progress"))
+			return os << '(' << "mark-in-progress" << ')';
+		if (type == string_to_command("mark-done"))
 			return os << '(' << "mark_done" << ')';
 		if (type == string_to_command("list"))
 			return os << '(' << "list" << ')';
