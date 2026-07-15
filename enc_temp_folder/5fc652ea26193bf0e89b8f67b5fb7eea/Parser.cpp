@@ -2,9 +2,6 @@
 namespace task_tracker {
     Command Parser::get_command(const std::vector<Token>& token_list)
     {
-
-        // TODO: SOLVE ERROR IF THERE IS ONLY ONE NOT LIST TOKEN
-
         // get the token and verify if its command is valid
         Token current_token = token_list[0];
         Command_type type;

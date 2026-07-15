@@ -14,8 +14,8 @@ namespace task_tracker {
 			m_task_storage{ task_storage }, m_console_view{console_view} {}
 		void run();
 	private:
-		const Task_manager& m_task_manager;
-		const Task_storage& m_task_storage;
+		const Task_manager m_task_manager;
+		const Task_storage m_task_storage;
 		Console_view& m_console_view;
 	};
 }

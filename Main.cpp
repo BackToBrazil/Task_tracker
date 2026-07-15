@@ -4,6 +4,7 @@
 #include "Token.h"
 #include "Console_io.h"
 #include "Token_stream.h"
+#include "Parser.h"
 using namespace task_tracker;
 using namespace std;
 
@@ -11,11 +12,13 @@ int main() {
 	try {
 		Console_io console_io{};
 		Token_stream token_stream{};
+		Parser parser{};
 
 		cout << "start:\n";
 		string line = console_io.get_line();
 		vector<Token> tokens = token_stream.get_tokens(line);
-		
+		Command command = parser.get_command(tokens);
+		cout << command;
 	}
 	catch (std::exception& e) {
 		std::cerr << e.what() << '\n';

@@ -1,10 +1,21 @@
 #pragma once
 #include <string>
+#include <iostream>
 namespace task_tracker {
-	class Command {
-	public:
-		std::string value;
-		Command(std::string vv) : value{vv} {}
-		void virtual execute();
+	enum class Command_type {
+		add,
+		delete_,
+		update,
+		mark_in_progress,
+		mark_done,
+		list,
 	};
+	struct Command {
+		Command_type command_type;
+		std::string argument;
+		Command(Command_type ct, std::string arg) : command_type{ ct }, argument{ arg }{}
+	};
+	Command_type string_to_command(const std::string&);
+	std::ostream& operator<<(std::ostream&, Command&);
+	std::ostream& operator<<(std::ostream&, Command_type&);
 }
