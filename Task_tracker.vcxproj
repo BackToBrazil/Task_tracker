@@ -127,9 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Add_command.cpp" />
     <ClCompile Include="App_controller.cpp" />
     <ClCompile Include="Console_io.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Task_manager.cpp" />
     <ClCompile Include="Task_storage.cpp" />
     <ClCompile Include="Token_stream.cpp" />
