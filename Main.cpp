@@ -11,6 +11,7 @@ using namespace std;
 int main() {
 	//TODO: WHEN ENTERING WHITESPACE OR NEWLINE AS FIRST CHAR THE PROGRAM CRASHES
 	//TODO: WHEN ENTERING STRANGE INPUT ('%' "asdsd") PROGRAM CRASHES
+	//TODO: task_storage.load() is only reading one task
 	try {
 		Console_io console_io{};
 		Token_stream token_stream{};
@@ -19,6 +20,11 @@ int main() {
 		Task_storage task_storage{};
 
 		cout << "start:\n";
+		std::vector<Task> my_task_list;
+		my_task_list = task_storage.load();
+		cout << "ouput:\n";
+		for (auto x : my_task_list)
+			cout << x << '\n';
 		while (true) {
 			string line = console_io.get_line();
 			vector<Token> tokens = token_stream.get_tokens(line);

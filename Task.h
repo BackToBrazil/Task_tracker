@@ -8,13 +8,17 @@ namespace task_tracker {
 	enum class status {
 		TODO,
 		IN_PROGRESS,
-		DONE
+		DONE,
+		UNKOWN,
 	};
 	struct Task {
 		// simple data structure for tasks.
 		Task(int id, std::string description, Date created_at) : m_id{ id }, m_description{description},
 			m_created_at{ created_at }, m_updated_at{created_at} {}
 		Task(int id, Date created_at) : m_id{ id }, m_created_at{ created_at }, m_updated_at{created_at} {}
+		Task(int id, std::string description, Date created_at, Date updated_at, status status) : m_id{ id }, m_description{ description },
+			m_created_at{ created_at }, m_updated_at{ updated_at }, m_status{status} {
+		}
 		int m_id;
 		std::string m_description = "no description.";
 		status m_status = status::TODO;
@@ -23,4 +27,5 @@ namespace task_tracker {
 	};
 	std::ostream& operator<<(std::ostream&, const Task& task);
 	std::ostream& operator<<(std::ostream&, const status& status);
+	std::istream& operator>>(std::istream&, status&);
 }

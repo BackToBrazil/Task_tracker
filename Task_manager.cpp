@@ -14,6 +14,33 @@ namespace task_tracker {
 			return os << "status not defined yet";
 		}
 	}
+	std::istream& operator>>(std::istream& is, status& status)
+	{
+		std::string ss;
+		char ch;
+		while (true) {
+			is >> ch;
+			if (!isalpha(ch)) {
+				is.unget();
+				break;
+			}
+			ss += ch;
+		}
+		if (ss == "todo" || ss == "TODO") {
+			status = status::TODO;
+			return is;
+		}
+		if (ss == "in-progress" || ss == "in_progress") {
+			status = status::IN_PROGRESS;
+			return is;
+		}
+		if (ss == "done") {
+			status = status::DONE;
+			return is;
+		}
+		status = status::UNKOWN;
+		return is;
+	}
 	std::ostream& operator<<(std::ostream& os, const task_tracker::Date& date) {
 		return os << '(' << date.m_day << '/' << date.m_month << '/' << date.m_year << ')';
 	}
