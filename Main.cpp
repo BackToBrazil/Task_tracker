@@ -16,6 +16,7 @@ int main() {
 		Token_stream token_stream{};
 		Parser parser{};
 		Task_manager task_manager{};
+		Task_storage task_storage{};
 
 		cout << "start:\n";
 		while (true) {
@@ -27,6 +28,8 @@ int main() {
 			}
 			for (auto x : task_manager.m_task_list)
 				cout << x << '\n';
+
+			task_storage.save(task_manager.m_task_list);
 			cout << "\ntype something: ";
 		}
 	}

@@ -1,5 +1,7 @@
 #pragma once
 #include "Task_manager.h"
+#include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 namespace task_tracker {
@@ -9,7 +11,7 @@ namespace task_tracker {
 		// its first going to load any Task from the file.JSON, then after it, pass them to the Task_manager.
 	public:
 		Task_storage(){}
-		void save(std::vector<Task>);	// revieces a vector and write it in the file.
+		void save(std::vector<Task>&);	// revieces a vector and write it in the file.
 		std::vector<Task> load();	// read file and return a vector with anything inside.
 		void write_file();	// read the elements inside a file.
 	private:
