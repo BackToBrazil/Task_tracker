@@ -10,4 +10,14 @@ namespace task_tracker {
 			",createdAt:" << x.m_created_at << ",updatedAt:" << x.m_updated_at << ')' << '\n';
 		std::cout << "save sucessful\n";
 	}
+	std::vector<Task> Task_storage::load()
+	{
+		std::vector<Task> reading;
+		std::ifstream ifs{ FILE_NAME };
+		if(!ifs)
+			throw std::runtime_error{ "could not read file " + FILE_NAME };
+		
+
+		return reading;
+	}
 }

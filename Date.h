@@ -9,4 +9,5 @@ namespace task_tracker {
 		int m_year;
 	};
 	std::ostream& operator<<(std::ostream&, const Date&);
+	std::istream& operator>>(std::istream&, Date&);
 }

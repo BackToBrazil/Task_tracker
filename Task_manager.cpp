@@ -17,6 +17,20 @@ namespace task_tracker {
 	std::ostream& operator<<(std::ostream& os, const task_tracker::Date& date) {
 		return os << '(' << date.m_day << '/' << date.m_month << '/' << date.m_year << ')';
 	}
+	std::istream& operator>>(std::istream& is, Date& date)
+	{
+		char ch1, day, ch2, ch4, year, ch5;
+		std::string month;
+		is >> ch1 >> day >> ch2 >> month >> ch4 >> year >> ch5;
+		if (!is)
+			return is;
+		if (ch1 != '(' || ch2 != '/' || ch4 != '/' || ch5 != ')') {
+			is.clear(std::ios::failbit);
+			return is;
+		}
+		date = Date{ day, month, year };
+		return is;
+	}
 	std::ostream& operator<<(std::ostream& os, const task_tracker::Task& task) {
 		return os << "Task ID: " << task.m_id << "\nTask Description: " << task.m_description << "\nTask Creation Date: " << task.m_created_at << "\nTask Update Date: " << task.m_updated_at <<
 			"\nTask STATUS: " << task.m_status << '\n';
