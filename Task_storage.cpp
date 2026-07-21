@@ -38,7 +38,7 @@ namespace task_tracker {
 				throw std::runtime_error{ "error could not recognize object" + std::string(1,ch) };
 			// "id":1,
 			// "id"
-			if (!verify_word(ifs, "id"))
+			if (!expect_string(ifs, "id"))
 				throw std::runtime_error{ "error could not read id" + std::string(1,ch) };
 			// ':'
 			expect_char(ifs, ':');
@@ -46,10 +46,9 @@ namespace task_tracker {
 			ifs >> id;
 			// ','
 			expect_char(ifs, ',');
-
 			// "description" : "asd",
 			// "description"
-			if (!verify_word(ifs, "description"))
+			if (!expect_string(ifs, "description"))
 				throw std::runtime_error{ "could not read 'description'" };
 			// ':'
 			expect_char(ifs, ':');
@@ -59,11 +58,14 @@ namespace task_tracker {
 			//std::cout << "description: " << description << '\n';			
 			// ','
 			expect_char(ifs, ',');
+			// "status" : "in-progress",
+			// "status"
+
 			return tasks;
 		}
 		return tasks;
 	}
-	bool Task_storage::verify_word(std::ifstream& ifs, std::string word)
+	bool Task_storage::expect_string(std::ifstream& ifs, std::string word)
 	{
 		std::string temp;
 		char ch = 0;
