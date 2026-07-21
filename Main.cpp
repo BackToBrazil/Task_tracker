@@ -23,7 +23,7 @@ int main() {
 		cout << "start:\n";
 		std::vector<Task> my_task_list;
 		my_task_list = task_storage.load();
-		cout << "ouput:\n";
+		//cout << "ouput:\n";
 		//for (auto x : my_task_list)
 		//	cout << x << '\n';
 		return 0;

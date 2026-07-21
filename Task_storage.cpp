@@ -36,24 +36,33 @@ namespace task_tracker {
 		while (ifs >> ch) {
 			if (ch != '{')
 				throw std::runtime_error{ "error could not recognize object" + std::string(1,ch) };
+			// "id":1,
+			// "id"
 			if (!verify_word(ifs, "id"))
 				throw std::runtime_error{ "error could not read id" + std::string(1,ch) };
-			// check the ':'
+			// ':'
 			ifs >> ch;
 			if(ch != ':')
 				throw std::runtime_error{ "error could not read id" + std::string(1,ch) };
-			// get the id
+			// 1
 			ifs >> id;
-			// check the ','
+			// ','
 			ifs >> ch;
 			if(ch != ',')
-				throw std::runtime_error{ "error could not read " + std::string(1,ch) };
-			if (!verify_word(ifs, ':'))
-				throw std::runtime_error{ "error could not read " + std::string(1,ch) };
+				throw std::runtime_error{ "failed the ',' check " + std::string(1,ch) };
+
+			// "description" : "asd",
+			// "description"
 			if (!verify_word(ifs, "description"))
-				throw std::runtime_error{ "error could not read " + std::string(1,ch) };
-			for (; ifs >> ch && ch != '"';)
-				description += ch;
+				throw std::runtime_error{ "could not read 'description'" };
+			// ':'
+			ifs >> ch;
+			if (ch != ':')
+				throw std::runtime_error{ "failed the ':' check " + std::string(1,ch) };
+			// "asd"
+			for (char temp; ifs >> temp && temp != '"';) {
+				description += temp;
+			}
 			std::cout << "description: " << description << '\n';
 			return tasks;
 		}
@@ -70,8 +79,10 @@ namespace task_tracker {
 			temp += ch;
 		}
 		if (temp == word) {
+			std::cout << "the '" << word << "' verification is: true\n";
 			return true;
 		}
+		std::cout << "the '" << word << "' verification is: false\n";
 		return false;
 	}
 	bool Task_storage::verify_word(std::ifstream& ifs, char ch)
@@ -79,8 +90,7 @@ namespace task_tracker {
 		char temp = 0;
 		ifs >> temp;
 		if (temp != ch)
-			return false;		
-		std::cout << temp << '\n';
+			return false;
 		return true;
 	}
 }
