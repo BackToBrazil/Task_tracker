@@ -29,6 +29,8 @@ namespace task_tracker {
 		char ch = 0;
 		std::string description;
 		std::string status;
+		Date created_at{ 00,"janeiro",0001 };
+		Date updated_at{ created_at };
 		std::ifstream ifs{ FILE_NAME };
 		int id = -1;
 		if (!ifs)
@@ -68,6 +70,18 @@ namespace task_tracker {
 			expect_char(ifs, '"');
 			std::getline(ifs, status, '"');
 			std::cout << "status: " << status << '\n';
+			// ','
+			expect_char(ifs, ',');
+
+			// "createdAt" : "20/07/2026",
+			// "createdAt"
+			expect_string(ifs, "createdAt");
+			// ':'
+			expect_char(ifs, ':');
+			// "20/07/2026"
+			expect_char(ifs, '"');
+			ifs >> created_at;
+			std::cout << "createdAt: " << created_at << '\n';
 			// ','
 			expect_char(ifs, ',');
 			return tasks;
