@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 namespace task_tracker {
 	using namespace task_tracker;
 	class Task_storage {
@@ -16,5 +17,6 @@ namespace task_tracker {
 		void write_file();	// read the elements inside a file.
 	private:
 		const std::string FILE_NAME{ "file.JSON" };
+		bool verify_word(std::ifstream&,std::string);	// verify if the next set of chars match the string passed as argument.
 	};
 }

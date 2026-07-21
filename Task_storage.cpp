@@ -35,17 +35,15 @@ namespace task_tracker {
 		// read the first char in the file, if it is not a '{' then its not the start of an object.
 		while (ifs >> ch) {
 			if (ch != '{')
-				throw std::runtime_error{ "error could not read " + ch };
-			// verify if the next line starts with a '"' then checks to see if its the id.
+				throw std::runtime_error{ "error could not recognize object" + ch };
+			if (!verify_word(ifs, "id"))
+				throw std::runtime_error{ "error could not read id" + ch };
+			// check the ':'
 			ifs >> ch;
-			if(ch != '"')
-				throw std::runtime_error{ "error could not read " + ch };
-			for (;ifs >> ch && ch != '"';) {
-				word += ch;
-			}
-			if (word == "id") {
-				ifs >> id;
-			}
+			if(ch != ':')
+				throw std::runtime_error{ "error could not read id" + ch };
+			// get the id
+			ifs >> id;
 			// check the ','
 			ifs >> ch;
 			if(ch != ',')
@@ -54,5 +52,20 @@ namespace task_tracker {
 			return tasks;
 		}
 		return tasks;
+	}
+	bool Task_storage::verify_word(std::ifstream& ifs, std::string word)
+	{
+		std::string temp;
+		char ch = 0;
+		ifs >> ch;
+		if (ch != '"')
+			return false;
+		for (;ifs >> ch && ch != '"';) {
+			temp += ch;
+		}
+		if (temp == word) {
+			return true;
+		}
+		return false;
 	}
 }
