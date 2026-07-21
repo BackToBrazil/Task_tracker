@@ -28,63 +28,72 @@ namespace task_tracker {
 		std::vector<Task> tasks;
 		char ch = 0;
 		std::string description;
+		std::string status;
 		std::ifstream ifs{ FILE_NAME };
 		int id = -1;
 		if (!ifs)
 			throw std::runtime_error{ "could not read " + FILE_NAME };
 		// read the first char in the file, if it is not a '{' then its not the start of an object.
 		while (ifs >> ch) {
+			// '{'
 			if (ch != '{')
-				throw std::runtime_error{ "error could not recognize object" + std::string(1,ch) };
+				throw std::runtime_error{ "expected '{' but caught '" + std::string(1,ch) + "'" };
 			// "id":1,
 			// "id"
-			if (!expect_string(ifs, "id"))
-				throw std::runtime_error{ "error could not read id" + std::string(1,ch) };
+			expect_string(ifs, "id");
 			// ':'
 			expect_char(ifs, ':');
 			// 1
 			ifs >> id;
+			std::cout << "id: " << id << '\n';
 			// ','
 			expect_char(ifs, ',');
 			// "description" : "asd",
 			// "description"
-			if (!expect_string(ifs, "description"))
-				throw std::runtime_error{ "could not read 'description'" };
+			expect_string(ifs, "description");
 			// ':'
 			expect_char(ifs, ':');
 			// "asd"
 			expect_char(ifs, '"');
 			std::getline(ifs, description,'"');
-			//std::cout << "description: " << description << '\n';			
+			std::cout << "description: " << description << '\n';
 			// ','
 			expect_char(ifs, ',');
 			// "status" : "in-progress",
 			// "status"
-
+			expect_string(ifs, "status");
+			// ':'
+			expect_char(ifs, ':');
+			// "in-progress"
+			expect_char(ifs, '"');
+			std::getline(ifs, status, '"');
+			std::cout << "status: " << status << '\n';
+			// ','
+			expect_char(ifs, ',');
 			return tasks;
 		}
 		return tasks;
 	}
-	bool Task_storage::expect_string(std::ifstream& ifs, std::string word)
+	void Task_storage::expect_string(std::ifstream& ifs, std::string word)
 	{
 		std::string temp;
 		char ch = 0;
-		ifs >> ch;
-		if (ch != '"')
-			return false;
-		for (;ifs >> ch && ch != '"';) {
-			temp += ch;
+		expect_char(ifs, '"');
+		if (std::getline(ifs, temp, '"')) {
+			if (temp == word) {
+				//std::cout << "expect_string successful: " + temp + '\n';
+				return;
+			}
+			else
+				throw std::runtime_error{ "expected '" + word + " but caught '" + temp + "'"};
 		}
-		if (temp == word) {
-			//std::cout << "the '" << word << "' verification is: true\n";
-			return true;
-		}
-		//std::cout << "the '" << word << "' verification is: false\n";
-		return false;
+		throw std::runtime_error{ "could not read '" + word + "'" };
 	}
 	void Task_storage::expect_char(std::ifstream& ifs, char ch)
 	{
-		char temp;
+		char temp = ifs.peek();
+		if (isspace(temp))
+			ifs.ignore();
 		if (ifs.get(temp)) {
 			if (temp != ch)
 				throw std::runtime_error{ "expected '" + std::string(1,ch) + "' but caught '" + std::string(1,temp) + "'"};
