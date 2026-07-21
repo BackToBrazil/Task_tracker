@@ -42,7 +42,7 @@ int main() {
 		}
 	}
 	catch (std::exception& e) {
-		std::cerr << "oops! something went wrong.\n";
+		std::cerr << "oops! something went wrong: ";
 		std::cerr << e.what() << '\n';
 	}
 }

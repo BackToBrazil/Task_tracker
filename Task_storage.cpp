@@ -41,29 +41,24 @@ namespace task_tracker {
 			if (!verify_word(ifs, "id"))
 				throw std::runtime_error{ "error could not read id" + std::string(1,ch) };
 			// ':'
-			ifs >> ch;
-			if(ch != ':')
-				throw std::runtime_error{ "error could not read id" + std::string(1,ch) };
+			expect_char(ifs, ':');
 			// 1
 			ifs >> id;
 			// ','
-			ifs >> ch;
-			if(ch != ',')
-				throw std::runtime_error{ "failed the ',' check " + std::string(1,ch) };
+			expect_char(ifs, ',');
 
 			// "description" : "asd",
 			// "description"
 			if (!verify_word(ifs, "description"))
 				throw std::runtime_error{ "could not read 'description'" };
 			// ':'
-			ifs >> ch;
-			if (ch != ':')
-				throw std::runtime_error{ "failed the ':' check " + std::string(1,ch) };
+			expect_char(ifs, ':');
 			// "asd"
-			for (char temp; ifs >> temp && temp != '"';) {
-				description += temp;
-			}
-			std::cout << "description: " << description << '\n';
+			expect_char(ifs, '"');
+			std::getline(ifs, description,'"');
+			//std::cout << "description: " << description << '\n';			
+			// ','
+			expect_char(ifs, ',');
 			return tasks;
 		}
 		return tasks;
@@ -79,18 +74,21 @@ namespace task_tracker {
 			temp += ch;
 		}
 		if (temp == word) {
-			std::cout << "the '" << word << "' verification is: true\n";
+			//std::cout << "the '" << word << "' verification is: true\n";
 			return true;
 		}
-		std::cout << "the '" << word << "' verification is: false\n";
+		//std::cout << "the '" << word << "' verification is: false\n";
 		return false;
 	}
-	bool Task_storage::verify_word(std::ifstream& ifs, char ch)
+	void Task_storage::expect_char(std::ifstream& ifs, char ch)
 	{
-		char temp = 0;
-		ifs >> temp;
-		if (temp != ch)
-			return false;
-		return true;
-	}
+		char temp;
+		if (ifs.get(temp)) {
+			if (temp != ch)
+				throw std::runtime_error{ "expected '" + std::string(1,ch) + "' but caught '" + std::string(1,temp) + "'"};
+		}
+		else {
+			throw std::runtime_error{ "could not read '" + std::string(1,ch) + "'"};
+		}
+	}	
 }
