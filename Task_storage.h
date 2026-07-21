@@ -18,5 +18,6 @@ namespace task_tracker {
 	private:
 		const std::string FILE_NAME{ "file.JSON" };
 		bool verify_word(std::ifstream&,std::string);	// verify if the next set of chars match the string passed as argument.
+		bool verify_word(std::ifstream&, char);
 	};
 }

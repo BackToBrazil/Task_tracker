@@ -48,7 +48,9 @@ namespace task_tracker {
 			ifs >> ch;
 			if(ch != ',')
 				throw std::runtime_error{ "error could not read " + ch };
-
+			if (!verify_word(ifs, ':'))
+				throw std::runtime_error{ "error could not read " + ch };
+			
 			return tasks;
 		}
 		return tasks;
@@ -67,5 +69,13 @@ namespace task_tracker {
 			return true;
 		}
 		return false;
+	}
+	bool Task_storage::verify_word(std::ifstream& ifs, char ch)
+	{
+		char temp = 0;
+		ifs >> temp;
+		if (temp != ch)
+			return false;		
+		return true;
 	}
 }
