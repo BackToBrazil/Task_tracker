@@ -27,7 +27,7 @@ namespace task_tracker {
 	{
 		std::vector<Task> tasks;
 		char ch = 0;
-		std::string word;
+		std::string description;
 		std::ifstream ifs{ FILE_NAME };
 		int id = -1;
 		if (!ifs)
@@ -35,22 +35,26 @@ namespace task_tracker {
 		// read the first char in the file, if it is not a '{' then its not the start of an object.
 		while (ifs >> ch) {
 			if (ch != '{')
-				throw std::runtime_error{ "error could not recognize object" + ch };
+				throw std::runtime_error{ "error could not recognize object" + std::string(1,ch) };
 			if (!verify_word(ifs, "id"))
-				throw std::runtime_error{ "error could not read id" + ch };
+				throw std::runtime_error{ "error could not read id" + std::string(1,ch) };
 			// check the ':'
 			ifs >> ch;
 			if(ch != ':')
-				throw std::runtime_error{ "error could not read id" + ch };
+				throw std::runtime_error{ "error could not read id" + std::string(1,ch) };
 			// get the id
 			ifs >> id;
 			// check the ','
 			ifs >> ch;
 			if(ch != ',')
-				throw std::runtime_error{ "error could not read " + ch };
+				throw std::runtime_error{ "error could not read " + std::string(1,ch) };
 			if (!verify_word(ifs, ':'))
-				throw std::runtime_error{ "error could not read " + ch };
-			
+				throw std::runtime_error{ "error could not read " + std::string(1,ch) };
+			if (!verify_word(ifs, "description"))
+				throw std::runtime_error{ "error could not read " + std::string(1,ch) };
+			for (; ifs >> ch && ch != '"';)
+				description += ch;
+			std::cout << "description: " << description << '\n';
 			return tasks;
 		}
 		return tasks;
@@ -76,6 +80,7 @@ namespace task_tracker {
 		ifs >> temp;
 		if (temp != ch)
 			return false;		
+		std::cout << temp << '\n';
 		return true;
 	}
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "App_controller.h"
 #include "Token.h"
 #include "Console_io.h"
@@ -41,6 +42,7 @@ int main() {
 		}
 	}
 	catch (std::exception& e) {
+		std::cerr << "oops! something went wrong.\n";
 		std::cerr << e.what() << '\n';
 	}
 }
