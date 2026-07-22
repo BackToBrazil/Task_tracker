@@ -27,20 +27,33 @@ namespace task_tracker {
     }
     std::vector<std::string> Token_stream::separate_line(const std::string& line)
     {
+        // add "teste1"
+        // list in-progress
+        // delete 1
         std::vector<std::string> words_list;
         std::string word;
+        int quotation_mark_counter = 0;
         for (auto x : line) {
-            if (!isspace(x)) {
+            if (x == '"') {
+                quotation_mark_counter++;
+            }
+            if (quotation_mark_counter < 1) {
+                if (!isspace(x)) {
+                    word += x;
+                }
+                else {
+                    words_list.push_back(word);
+                    word.erase();
+                }
+            }
+            if (quotation_mark_counter > 0) {
+                if(quotation_mark_counter == 2){
+                    words_list.push_back(word);
+                    word.erase();
+                }
                 word += x;
             }
-            else {
-                words_list.push_back(word);
-                word.erase();
-            }
         }
-        words_list.push_back(word);
-        word.erase();
-
         return words_list;
     }
     std::vector<Token> Token_stream::get_tokens(const std::string& line)
