@@ -47,14 +47,18 @@ namespace task_tracker {
 	std::istream& operator>>(std::istream& is, Date& date)
 	{
 		// TODO: REFACTOR THIS, MAYBE USE THE TASK_STORAGE EXPECT_CHAR() AND EXPECT_STRING() HELPER FUNCTIONS
-		char ch1, day, ch2, ch4, year, ch5;
-		std::string month;
-		is >> ch1 >> day >> ch2 >> month >> ch4 >> year >> ch5;
-		if (!is)
-			return is;
-		if (ch1 != '(' || ch2 != '/' || ch4 != '/' || ch5 != ')') {
-			is.clear(std::ios::failbit);
-			return is;
+		// (01/february/2026)
+		int day = -1;
+		std::string month = "janeiro";
+		int year = 0001;
+		char ch = 0;
+		while (is.good()) {
+			parser_utils::expect_char(is, '(');
+			is >> day;
+			parser_utils::expect_char(is, '/');
+			std::getline(is, month, '/');
+			is >> year;
+			break;
 		}
 		date = Date{ day, month, year };
 		return is;
