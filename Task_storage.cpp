@@ -23,12 +23,12 @@ namespace task_tracker {
 			<< '}' << '\n';
 		std::cout << "save sucessful\n";
 	}
-	std::vector<Task> Task_storage::load()
+	void Task_storage::load(std::vector<Task>& task_list)
 	{
 		std::vector<Task> tasks;
 		char ch = 0;
 		std::string description;
-		std::string status;
+		status status = status::UNKOWN;
 		Date created_at{ 00,"janeiro",0001 };
 		Date updated_at{ 00,"janeiro",0001 };
 		std::ifstream ifs{ FILE_NAME };
@@ -39,7 +39,7 @@ namespace task_tracker {
 		while (ifs >> ch) {
 			// '{'
 			if (ch != '{') {
-				return tasks;
+				break;
 			}
 			// "id":1,
 			// "id"
@@ -48,7 +48,6 @@ namespace task_tracker {
 			parser_utils::expect_char(ifs, ':');
 			// 1
 			ifs >> id;
-			std::cout << "id: " << id << '\n';
 			// ','
 			parser_utils::expect_char(ifs, ',');
 			// "description" : "asd",
@@ -59,7 +58,6 @@ namespace task_tracker {
 			// "asd"
 			parser_utils::expect_char(ifs, '"');
 			std::getline(ifs, description,'"');
-			std::cout << "description: " << description << '\n';
 			// ','
 			parser_utils::expect_char(ifs, ',');
 			// "status" : "in-progress",
@@ -69,8 +67,8 @@ namespace task_tracker {
 			parser_utils::expect_char(ifs, ':');
 			// "in-progress"
 			parser_utils::expect_char(ifs, '"');
-			std::getline(ifs, status, '"');
-			std::cout << "status: " << status << '\n';
+			ifs >> status;
+			parser_utils::expect_char(ifs, '"');
 			// ','
 			parser_utils::expect_char(ifs, ',');
 
@@ -83,7 +81,6 @@ namespace task_tracker {
 			parser_utils::expect_char(ifs, '"');
 			ifs >> created_at;
 			parser_utils::expect_char(ifs, '"');
-			std::cout << "createdAt: " << created_at << '\n';
 			// ','
 			parser_utils::expect_char(ifs, ',');
 
@@ -96,11 +93,10 @@ namespace task_tracker {
 			parser_utils::expect_char(ifs, '"');
 			ifs >> updated_at;
 			parser_utils::expect_char(ifs, '"');
-			std::cout << "updatedAt: " << updated_at << '\n';
-
 			// '}'
 			parser_utils::expect_char(ifs, '}');
+
+			task_list.push_back(Task{ id,description,created_at,updated_at,status });
 		}
-		return tasks;
 	}
 }

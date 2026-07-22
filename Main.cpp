@@ -20,13 +20,11 @@ int main() {
 		Task_manager task_manager{};
 		Task_storage task_storage{};
 
+		task_storage.load(task_manager.m_task_list);
+		cout << "ouput:\n";
+		for (auto x : task_manager.m_task_list)
+			cout << x << '\n';
 		cout << "start:\n";
-		std::vector<Task> my_task_list;
-		my_task_list = task_storage.load();
-		//cout << "ouput:\n";
-		//for (auto x : my_task_list)
-		//	cout << x << '\n';
-		return 0;
 		while (true) {
 			string line = console_io.get_line();
 			vector<Token> tokens = token_stream.get_tokens(line);
