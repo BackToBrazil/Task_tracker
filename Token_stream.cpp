@@ -27,8 +27,6 @@ namespace task_tracker {
     }
     std::vector<std::string> Token_stream::separate_line(const std::string& line)
     {
-        // REFACTOR SUGGESTION -> Use new helper functions/Use std's library functions
-
         std::vector<std::string> words_list;
         std::string word;
         for (auto x : line) {

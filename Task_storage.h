@@ -15,7 +15,6 @@ namespace task_tracker {
 		Task_storage(){}
 		void save(std::vector<Task>&);	// revieces a vector and write it in the file.
 		std::vector<Task> load();	// read file and return a vector with anything inside.
-		void write_file();	// read the elements inside a file.
 	private:
 		const std::string FILE_NAME{ "file.JSON" };
 	};

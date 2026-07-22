@@ -2,7 +2,6 @@
 namespace parser_utils {
 	void parser_utils::expect_string(std::istream& ifs, std::string word)
 	{
-		// TODO: CREATE AND OVERLOAD
 		std::string temp;
 		char ch = 0;
 		expect_char(ifs, '"');
