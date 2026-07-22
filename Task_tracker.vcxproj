@@ -127,8 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="App_controller.cpp" />
-    <ClCompile Include="Command.cpp" />
     <ClCompile Include="Console_io.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -138,7 +136,6 @@
     <ClCompile Include="Token_stream.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App_controller.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Console_io.h" />
     <ClInclude Include="Date.h" />
