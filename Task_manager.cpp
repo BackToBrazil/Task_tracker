@@ -55,6 +55,7 @@ namespace task_tracker {
 			parser_utils::expect_char(is, '/');
 			std::getline(is, month, '/');
 			is >> year;
+			parser_utils::expect_char(is, ')');
 			break;
 		}
 		date = Date{ day, month, year };

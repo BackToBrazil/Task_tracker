@@ -30,7 +30,7 @@ namespace task_tracker {
 		std::string description;
 		std::string status;
 		Date created_at{ 00,"janeiro",0001 };
-		Date updated_at{ created_at };
+		Date updated_at{ 00,"janeiro",0001 };
 		std::ifstream ifs{ FILE_NAME };
 		int id = -1;
 		if (!ifs)
@@ -38,8 +38,9 @@ namespace task_tracker {
 		// read the first char in the file, if it is not a '{' then its not the start of an object.
 		while (ifs >> ch) {
 			// '{'
-			if (ch != '{')
-				throw std::runtime_error{ "expected '{' but caught '" + std::string(1,ch) + "'" };
+			if (ch != '{') {
+				return tasks;
+			}
 			// "id":1,
 			// "id"
 			parser_utils::expect_string(ifs, "id");
@@ -81,10 +82,24 @@ namespace task_tracker {
 			// "20/07/2026"
 			parser_utils::expect_char(ifs, '"');
 			ifs >> created_at;
+			parser_utils::expect_char(ifs, '"');
 			std::cout << "createdAt: " << created_at << '\n';
 			// ','
 			parser_utils::expect_char(ifs, ',');
-			return tasks;
+
+			// "updatedAt" : "20/07/2026",
+			// "updatedAt"
+			parser_utils::expect_string(ifs, "updatedAt");
+			// ':'
+			parser_utils::expect_char(ifs, ':');
+			// "20/07/2026"
+			parser_utils::expect_char(ifs, '"');
+			ifs >> updated_at;
+			parser_utils::expect_char(ifs, '"');
+			std::cout << "updatedAt: " << updated_at << '\n';
+
+			// '}'
+			parser_utils::expect_char(ifs, '}');
 		}
 		return tasks;
 	}
