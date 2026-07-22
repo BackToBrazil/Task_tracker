@@ -1,5 +1,6 @@
 #pragma once
 #include "Task_manager.h"
+#include "Parser_utils.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -17,7 +18,5 @@ namespace task_tracker {
 		void write_file();	// read the elements inside a file.
 	private:
 		const std::string FILE_NAME{ "file.JSON" };
-		void expect_string(std::ifstream&,std::string);	// verify if the next set of chars match the string passed as argument.
-		void expect_char(std::ifstream&, char);	// verify if the next char is the expected one and waste it
 	};
 }

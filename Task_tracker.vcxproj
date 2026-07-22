@@ -132,6 +132,7 @@
     <ClCompile Include="Console_io.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Parser_utils.cpp" />
     <ClCompile Include="Task_manager.cpp" />
     <ClCompile Include="Task_storage.cpp" />
     <ClCompile Include="Token_stream.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Console_io.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="Parser_utils.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="Task_manager.h" />
     <ClInclude Include="Task_storage.h" />

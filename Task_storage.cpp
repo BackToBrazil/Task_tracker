@@ -42,78 +42,50 @@ namespace task_tracker {
 				throw std::runtime_error{ "expected '{' but caught '" + std::string(1,ch) + "'" };
 			// "id":1,
 			// "id"
-			expect_string(ifs, "id");
+			parser_utils::expect_string(ifs, "id");
 			// ':'
-			expect_char(ifs, ':');
+			parser_utils::expect_char(ifs, ':');
 			// 1
 			ifs >> id;
 			std::cout << "id: " << id << '\n';
 			// ','
-			expect_char(ifs, ',');
+			parser_utils::expect_char(ifs, ',');
 			// "description" : "asd",
 			// "description"
-			expect_string(ifs, "description");
+			parser_utils::expect_string(ifs, "description");
 			// ':'
-			expect_char(ifs, ':');
+			parser_utils::expect_char(ifs, ':');
 			// "asd"
-			expect_char(ifs, '"');
+			parser_utils::expect_char(ifs, '"');
 			std::getline(ifs, description,'"');
 			std::cout << "description: " << description << '\n';
 			// ','
-			expect_char(ifs, ',');
+			parser_utils::expect_char(ifs, ',');
 			// "status" : "in-progress",
 			// "status"
-			expect_string(ifs, "status");
+			parser_utils::expect_string(ifs, "status");
 			// ':'
-			expect_char(ifs, ':');
+			parser_utils::expect_char(ifs, ':');
 			// "in-progress"
-			expect_char(ifs, '"');
+			parser_utils::expect_char(ifs, '"');
 			std::getline(ifs, status, '"');
 			std::cout << "status: " << status << '\n';
 			// ','
-			expect_char(ifs, ',');
+			parser_utils::expect_char(ifs, ',');
 
 			// "createdAt" : "20/07/2026",
 			// "createdAt"
-			expect_string(ifs, "createdAt");
+			parser_utils::expect_string(ifs, "createdAt");
 			// ':'
-			expect_char(ifs, ':');
+			parser_utils::expect_char(ifs, ':');
 			// "20/07/2026"
-			expect_char(ifs, '"');
+			parser_utils::expect_char(ifs, '"');
 			ifs >> created_at;
 			std::cout << "createdAt: " << created_at << '\n';
 			// ','
-			expect_char(ifs, ',');
+			parser_utils::expect_char(ifs, ',');
 			return tasks;
 		}
 		return tasks;
 	}
-	void Task_storage::expect_string(std::ifstream& ifs, std::string word)
-	{
-		std::string temp;
-		char ch = 0;
-		expect_char(ifs, '"');
-		if (std::getline(ifs, temp, '"')) {
-			if (temp == word) {
-				//std::cout << "expect_string successful: " + temp + '\n';
-				return;
-			}
-			else
-				throw std::runtime_error{ "expected '" + word + " but caught '" + temp + "'"};
-		}
-		throw std::runtime_error{ "could not read '" + word + "'" };
-	}
-	void Task_storage::expect_char(std::ifstream& ifs, char ch)
-	{
-		char temp = ifs.peek();
-		if (isspace(temp))
-			ifs.ignore();
-		if (ifs.get(temp)) {
-			if (temp != ch)
-				throw std::runtime_error{ "expected '" + std::string(1,ch) + "' but caught '" + std::string(1,temp) + "'"};
-		}
-		else {
-			throw std::runtime_error{ "could not read '" + std::string(1,ch) + "'"};
-		}
-	}	
 }
